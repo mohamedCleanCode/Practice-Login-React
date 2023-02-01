@@ -1,7 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "./Auth";
 
 const Navbar = () => {
+  const auth = useAuth();
+
   const style = {
     display: "inline-block",
     margin: "20px",
@@ -17,9 +20,11 @@ const Navbar = () => {
       <NavLink style={style} to="/profile">
         Profile
       </NavLink>
-      <NavLink style={style} to="/login">
-        Login
-      </NavLink>
+      {!auth.user && (
+        <NavLink style={style} to="/login">
+          Login
+        </NavLink>
+      )}
     </div>
   );
 };
